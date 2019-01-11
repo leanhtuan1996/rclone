@@ -26,7 +26,7 @@ RUN apk -U add ca-certificates fuse wget zip dcron tzdata \
 COPY entrypoint.sh /
 COPY sync.sh /
 COPY sync-abort.sh /
-
+RUN chmod 777 /entrypoint.sh
 VOLUME ["/config"]
 
 ENTRYPOINT ["/entrypoint.sh"]
