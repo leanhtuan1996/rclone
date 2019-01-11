@@ -27,6 +27,8 @@ COPY entrypoint.sh /
 COPY sync.sh /
 COPY sync-abort.sh /
 RUN chmod 777 /entrypoint.sh
+RUN chmod 777 /sync.sh
+RUN chmod 777 /sync-abort.sh
 VOLUME ["/config"]
 
 ENTRYPOINT ["/entrypoint.sh"]
