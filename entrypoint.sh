@@ -10,8 +10,6 @@ fi
 
 rm -f /tmp/sync.pid
 
-export BACKUP_TIME=$( date '+%F_%H:%M:%S' )
-
 if [ -z "$SYNC_SRC" ] || [ -z "$SYNC_DEST" ]
 then
   echo "INFO: No SYNC_SRC and SYNC_DEST. Starting rclone config"
@@ -38,7 +36,7 @@ else
     echo "$CRON /sync.sh >>/tmp/sync.log 2>&1" > /tmp/crontab.tmp
     if [ -z "$CRON_ABORT" ]
     then
-      echo "INFO: Add CRON_ABORT=\"0 6 * * *\" to cancel outstanding sync at 6am"
+      echo "INFO: Add CRON_ABORT=\"0 0 * * *\" to cancel outstanding sync at 6am"
     else
       echo "$CRON_ABORT /sync-abort.sh >>/tmp/sync.log 2>&1" >> /tmp/crontab.tmp
     fi

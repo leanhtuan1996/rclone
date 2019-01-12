@@ -15,7 +15,7 @@ ENV FORCE_SYNC=
 ENV CHECK_URL=
 ENV TZ="Asia/Ho_Chi_Minh"
 
-RUN apk -U add ca-certificates fuse wget zip dcron tzdata \
+RUN apk -U add ca-certificates fuse wget zip vim dcron tzdata \
     && rm -rf /var/cache/apk/* \
     && cd /tmp \
     && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
