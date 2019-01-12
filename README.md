@@ -32,13 +32,14 @@ A first run of the container can help in the creation of the file, but feel free
 
 ```
 $ mkdir config
-$ docker run --rm -it -v $(pwd)/config:/config bcardiff/rclone
+$ docker run --rm -it -v $(pwd)/config:/config justin96/rclone
 ```
 
 ### Perform sync in a daily basis
 
 A few environment variables allow you to customize the behavior of the sync:
 
+* `SYNC_SRC_TO_ZIP` source location to zip file and move it to `SYNC_SRC`
 * `SYNC_SRC` source location for `rclone sync` command
 * `SYNC_DEST` destination location for `rclone sync` command
 * `CRON` crontab schedule `0 0 * * *` to perform sync every midnight
@@ -49,7 +50,7 @@ A few environment variables allow you to customize the behavior of the sync:
 * `TZ` set the [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to use for the cron and log `America/Argentina/Buenos_Aires`
 
 ```bash
-$ docker run --rm -it -v $(pwd)/config:/config -v /path/to/source:/source -e SYNC_SRC="/source" -e SYNC_DEST="dest:path" -e TZ="America/Argentina/Buenos_Aires" -e CRON="0 0 * * *" -e CRON_ABORT="0 6 * * *" -e FORCE_SYNC=1 -e CHECK_URL=https://hchk.io/hchk_uuid bcardiff/rclone
+$ docker run --rm -it -v $(pwd)/config:/config -v /path/to/zip:/zip -v /path/to/source:/source -e SYNC_SRC_TO_ZIP="/zip" -e SYNC_SRC="/source" -e SYNC_DEST="dest:path" -e TZ="America/Argentina/Buenos_Aires" -e CRON="0 0 * * *" -e CRON_ABORT="0 6 * * *" -e FORCE_SYNC=1 -e CHECK_URL=https://hchk.io/hchk_uuid justin96/rclone
 ```
 
 See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest syntax and additional options.
